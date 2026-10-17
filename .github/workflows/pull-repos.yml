@@ -1,0 +1,49 @@
+name: pull-repos
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-repos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        repo:
+          - openai/codex
+          - NousResearch/hermes-agent
+    steps:
+      - name: Clone ${{ matrix.repo }} (shallow)
+        run: |
+          dir="${GITHUB_REPO##*/}"
+          start=$(date +%s%3N)
+          git clone --depth 1 "https://github.com/$GITHUB_REPO" "$dir"
+          elapsed=$(( $(date +%s%3N) - start ))
+          {
+            echo "## $GITHUB_REPO"
+            echo "- commit: \`$(git -C "$dir" rev-parse HEAD)\`"
+            echo "- subject: $(git -C "$dir" log -1 --pretty=%s)"
+            echo "- size: $(du -sh "$dir" | cut -f1)"
+            echo "- tracked files: $(git -C "$dir" ls-files | wc -l)"
+            echo "- shallow: $(git -C "$dir" rev-parse --is-shallow-repository)"
+            echo "- clone time: ${elapsed}ms"
+            echo "- finished at: $(date -u +%H:%M:%S.%3NZ)"
+          } | tee "report-$dir.txt" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_REPO: ${{ matrix.repo }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: clone-report-${{ strategy.job-index }}
+          path: report-*.txt
+          retention-days: 1
