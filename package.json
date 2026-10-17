@@ -1,0 +1,12 @@
+{
+  "name": "ci-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "dev": "node scripts/dev.mjs",
+    "deploy": "wrangler deploy"
+  }
+}

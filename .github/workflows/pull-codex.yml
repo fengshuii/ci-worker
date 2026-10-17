@@ -1,0 +1,38 @@
+name: pull-codex
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-codex-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone openai/codex (shallow)
+        run: |
+          git clone --depth 1 https://github.com/openai/codex codex
+          {
+            echo "## codex clone"
+            echo "- commit: \`$(git -C codex rev-parse HEAD)\`"
+            echo "- subject: $(git -C codex log -1 --pretty=%s)"
+            echo "- size: $(du -sh codex | cut -f1)"
+            echo "- tracked files: $(git -C codex ls-files | wc -l)"
+            echo "- shallow: $(git -C codex rev-parse --is-shallow-repository)"
+          } | tee clone-report.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: clone-report
+          path: clone-report.txt
+          retention-days: 1

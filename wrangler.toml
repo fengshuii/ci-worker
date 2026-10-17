@@ -1,0 +1,8 @@
+name = "ci-worker"
+main = "src/index.js"
+compatibility_date = "2026-10-17"
+
+[vars]
+GITHUB_OWNER = "fengshuii"
+GITHUB_REPO = "water-web"
+GITHUB_DEFAULT_BRANCH = "water-web"
