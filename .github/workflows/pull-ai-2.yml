@@ -1,0 +1,298 @@
+name: pull-ai-2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-ai-2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        repo:
+          - fishaudio/fish-speech
+          - eriklindernoren/ML-From-Scratch
+          - open-mmlab/mmdetection
+          - zeroclaw-labs/zeroclaw
+          - Fincept-Corporation/FinceptTerminal
+          - onyx-dot-app/onyx
+          - yunjey/pytorch-tutorial
+          - datawhalechina/self-llm
+          - topoteretes/cognee
+          - CloakHQ/CloakBrowser
+          - tirth8205/code-review-graph
+          - feder-cr/invisible_dots
+          - iOfficeAI/OfficeCLI
+          - getzep/graphiti
+          - ScrapeGraphAI/Scrapegraph-ai
+          - Zackriya-Solutions/meetily
+          - jumpserver/jumpserver
+          - stanford-oval/storm
+          - Lightning-AI/pytorch-lightning
+          - storytold/artcraft
+          - ahujasid/mcp-for-blender
+          - 78/xiaozhi-esp32
+          - AMAI-GmbH/AI-Expert-Roadmap
+          - nanocoai/nanoclaw
+          - decolua/9router
+          - vxcontrol/pentagi
+          - Anil-matcha/Open-Generative-AI
+          - eugeneyan/applied-ml
+          - ComposioHQ/composio
+          - e2b-dev/awesome-ai-agents
+          - mksglu/context-mode
+          - jackwener/OpenCLI
+          - langchain-ai/deepagents
+          - oraios/serena
+          - facefusion/facefusion
+          - nautechsystems/nautilus_trader
+          - tatsu-lab/stanford_alpaca
+          - academic/awesome-datascience
+          - assafelovic/gpt-researcher
+          - openai/openai-agents-python
+          - JaidedAI/EasyOCR
+          - gitleaks/gitleaks
+          - deepinsight/insightface
+          - modular/modular
+          - NirDiamant/RAG_Techniques
+          - d2l-ai/d2l-en
+          - aishwaryanr/awesome-generative-ai-guide
+          - labring/FastGPT
+          - simstudioai/sim
+          - Infisical/infisical
+          - The-Art-of-Hacking/h4cker
+          - HandsOnLLM/Hands-On-Large-Language-Models
+          - opendataloader-project/opendataloader-pdf
+          - kestra-io/kestra
+          - rohitg00/agentmemory
+          - JushBJJ/Mr.-Ranedeer-AI-Tutor
+          - python-telegram-bot/python-telegram-bot
+          - chroma-core/chroma
+          - TencentCloud/TencentDB-Agent-Memory
+          - alibaba/page-agent
+          - donnemartin/data-science-ipython-notebooks
+          - ChristosChristofidis/awesome-deep-learning
+          - harvard-edge/cs249r_book
+          - ifixai-ai/iFixAi
+          - dmlc/xgboost
+          - yamadashy/repomix
+          - ZuzooVn/machine-learning-for-software-engineers
+          - mastra-ai/mastra
+          - srbhr/Resume-Matcher
+          - invoke-ai/InvokeAI
+          - charmbracelet/crush
+          - microsoft/semantic-kernel
+          - QwenLM/qwen-code
+          - deezer/spleeter
+          - HumanSignal/label-studio
+          - mlflow/mlflow
+          - BloopAI/vibe-kanban
+          - OtterMind/Chat2DB
+          - alirezarezvani/claude-skills
+          - eyaltoledano/claude-task-master
+          - fastai/fastai
+          - PrefectHQ/fastmcp
+          - gastownhall/beads
+          - Kilo-Org/kilocode
+          - Fosowl/agenticSeek
+          - vercel/ai
+          - t8y2/dbx
+          - onlook-dev/onlook
+          - Donchitos/Claude-Code-Game-Studios
+          - deepset-ai/haystack
+          - humanlayer/12-factor-agents
+          - Anjok07/ultimatevocalremovergui
+          - WZMIAOMIAO/deep-learning-for-image-processing
+          - terryum/awesome-deep-learning-papers
+          - a2aproject/A2A
+          - dapr/dapr
+          - datawhalechina/pumpkin-book
+          - promptfoo/promptfoo
+          - enescingoz/awesome-n8n-templates
+          - go-kratos/kratos
+          - SYSTRAN/faster-whisper
+          - shap/shap
+          - Cinnamon/kotaemon
+          - VoltAgent/awesome-claude-code-subagents
+          - browserbase/stagehand
+          - titanwings/distilly
+          - ageron/handson-ml
+          - matterport/Mask_RCNN
+          - lucidrains/vit-pytorch
+          - toon-format/toon
+          - microsoft/JARVIS
+          - mxgmn/WaveFunctionCollapse
+          - fastai/fastbook
+          - junyanz/pytorch-CycleGAN-and-pix2pix
+          - liguodongiot/llm-action
+          - letta-ai/letta
+          - activepieces/activepieces
+          - flipped-aurora/gin-vue-admin
+          - haotian-liu/LLaVA
+          - pascalorg/editor
+          - trekhleb/homemade-machine-learning
+          - datawhalechina/llm-cookbook
+          - dolthub/dolt
+          - m-bain/whisperX
+          - NirDiamant/GenAI_Agents
+          - nocobase/nocobase
+          - modelcontextprotocol/python-sdk
+          - index-tts/index-tts
+          - plotly/dash
+          - guillaumemeyer/watermarks-remover
+          - graphdeco-inria/gaussian-splatting
+          - slopus/happy
+          - PaddlePaddle/Paddle
+          - pyg-team/pytorch_geometric
+          - AccumulateMore/CV
+          - QwenAudio/CosyVoice
+          - Tencent/ncnn
+          - every-app/open-seo
+          - sinaptik-ai/pandas-ai
+          - lukasmasuch/best-of-ml-python
+          - MaaAssistantArknights/MaaAssistantArknights
+          - coleam00/Archon
+          - HKUDS/RAG-Anything
+          - serengil/deepface
+          - wechaty/wechaty
+          - conwnet/github1s
+          - mlc-ai/mlc-llm
+          - marimo-team/marimo
+          - Skyvern-AI/skyvern
+          - spmallick/learnopencv
+          - czlonkowski/n8n-mcp
+          - micro/go-micro
+          - 1Panel-dev/MaxKB
+          - hypit-ai/hypit
+          - sebastianruder/NLP-progress
+          - amusi/CVPR2026-Papers-with-Code
+          - jundot/omlx
+          - AiHubCN/Awesome-Chinese-LLM
+          - NVIDIA/NemoClaw
+          - comet-ml/opik
+          - wandb/openui
+          - steipete/CodexBar
+          - TheAlgorithms/C
+          - winfunc/opcode
+          - dipakkr/awesome-ai-engineering
+          - BuilderIO/gpt-crawler
+          - k4yt3x/video2x
+          - microsoft/unilm
+          - MLEveryday/100-Days-Of-ML-Code
+          - microsoft/onnxruntime
+          - huggingface/datasets
+          - docmost/docmost
+          - screenpipe/screenpipe
+          - dyad-sh/dyad
+          - recommenders-team/recommenders
+          - QwenLM/Qwen
+          - elder-plinius/L1B3RT4S
+          - google/adk-python
+          - jina-ai/serve
+          - huggingface/peft
+          - zergtant/pytorch-handbook
+          - NirDiamant/agents-towards-production
+          - coze-dev/coze-studio
+          - bee-san/Ciphey
+          - Zeyi-Lin/HivisionIDPhotos
+          - onnx/onnx
+          - KKKKhazix/khazix-skills
+          - AI4Finance-Foundation/FinGPT
+          - stefan-jansen/machine-learning-for-trading
+          - RasaHQ/rasa
+          - jnMetaCode/agency-agents-zh
+          - liyupi/ai-guide
+          - getpaseo/paseo
+          - earthtojake/text-to-cad
+          - Ebony-Vinyl/dsh-our-free-model
+          - nikivdev/code
+          - cube-js/cube
+          - EthicalML/awesome-production-machine-learning
+          - qax-os/excelize
+          - vercel/chatbot
+          - 1jehuang/jcode
+          - davideuler/architecture.of.internet-product
+          - Evil0ctal/Douyin_TikTok_Download_API
+          - modelscope/FunASR
+          - pydantic/pydantic-ai
+          - SWE-agent/SWE-agent
+          - hummingbot/hummingbot
+          - NVIDIA/SkillSpector
+          - afshinea/stanford-cs-229-machine-learning
+          - kortix-ai/suna
+          - eosphoros-ai/DB-GPT
+          - camel-ai/owl
+          - walkinglabs/learn-harness-engineering
+          - dailydotdev/daily
+          - Alibaba-NLP/DeepResearch
+          - dzhng/deep-research
+          - Unity-Technologies/ml-agents
+          - datawhalechina/easy-vibe
+          - elizaOS/eliza
+          - stas00/ml-engineering
+          - ShusenTang/Dive-into-DL-PyTorch
+          - agent0ai/agent-zero
+          - danielmiessler/LifeOS
+          - nndl/nndl
+          - jianchang512/pyvideotrans
+          - nari-labs/dia
+          - mlc-ai/web-llm
+          - mrdbourke/pytorch-deep-learning
+          - lexmount/moli
+          - tensorflow/tfjs
+          - amark/gun
+          - AgriciDaniel/claude-seo
+          - keon/awesome-nlp
+          - jlcodes99/cockpit-tools
+          - nesquena/hermes-webui
+          - bbfamily/abu
+          - ymcui/Chinese-LLaMA-Alpaca
+          - lightgbm-org/LightGBM
+          - iii-hq/iii
+          - alyssaxuu/screenity
+          - microsoft/agent-lightning
+          - google/magika
+          - nukeop/nuclear
+          - UFund-Me/Qbot
+          - keploy/keploy
+          - NVIDIA-NeMo/Speech
+          - meta-llama/llama-cookbook
+          - microsoft/AirSim
+          - teambit/bit
+          - browser-use/browser-harness
+    steps:
+      - name: Clone ${{ matrix.repo }} (shallow)
+        run: |
+          dir="${GITHUB_REPO##*/}"
+          start=$(date +%s%3N)
+          git clone --depth 1 "https://github.com/$GITHUB_REPO" "$dir"
+          elapsed=$(( $(date +%s%3N) - start ))
+          {
+            echo "## $GITHUB_REPO"
+            echo "- commit: \`$(git -C "$dir" rev-parse HEAD)\`"
+            echo "- subject: $(git -C "$dir" log -1 --pretty=%s)"
+            echo "- size: $(du -sh "$dir" | cut -f1)"
+            echo "- tracked files: $(git -C "$dir" ls-files | wc -l)"
+            echo "- shallow: $(git -C "$dir" rev-parse --is-shallow-repository)"
+            echo "- clone time: ${elapsed}ms"
+            echo "- disk free after: $(df -h --output=avail / | tail -1 | tr -d ' ')"
+          } | tee "report-$dir.txt" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_REPO: ${{ matrix.repo }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report-${{ strategy.job-index }}
+          path: report-*.txt
+          retention-days: 1

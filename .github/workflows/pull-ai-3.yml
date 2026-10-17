@@ -1,0 +1,298 @@
+name: pull-ai-3
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-ai-3-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        repo:
+          - arc53/DocsGPT
+          - xming521/WeClone
+          - emcie-co/parlant
+          - ahmedkhaleel2004/gitdiagram
+          - img2threejs/img2threejs
+          - ujjwalkarn/Machine-Learning-Tutorials
+          - langbot-app/LangBot
+          - AsyncFuncAI/deepwiki-open
+          - RightNow-AI/openfang
+          - MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning
+          - sczhou/CodeFormer
+          - NVIDIA/Megatron-LM
+          - BradyFU/Awesome-Multimodal-Large-Language-Models
+          - rowboatlabs/rowboat
+          - HBAI-Ltd/Toonflow-app
+          - justadudewhohacks/face-api.js
+          - pytorch/vision
+          - camel-ai/camel
+          - Canner/WrenAI
+          - getmaxun/maxun
+          - Mikoto10032/DeepLearning
+          - NLP-LOVE/ML-NLP
+          - GoogleCloudPlatform/generative-ai
+          - rocketride-org/rocketride-server
+          - deepseek-ai/Janus
+          - TransformerOptimus/SuperAGI
+          - tradecatlabs/vibe-coding-cn
+          - wanshuiyin/Auto-claude-code-research-in-sleep
+          - leon-ai/leon
+          - NVlabs/instant-ngp
+          - lidge-jun/opencodex
+          - microsoft/mcp-for-beginners
+          - dair-ai/ML-YouTube-Courses
+          - dair-ai/ml-visuals
+          - RyanCodrai/turbovec
+          - EvoLinkAI/awesome-gpt-image-2-API-and-Prompts
+          - MemoriLabs/Memori
+          - coder/coder
+          - kubesphere/kubesphere
+          - argoproj/argo-workflows
+          - cft0808/edict
+          - cvat-ai/cvat
+          - composio-community/awesome-codex-skills
+          - weaviate/weaviate
+          - datawhalechina/leedl-tutorial
+          - xbtlin/ai-berkshire
+          - bharathgs/Awesome-pytorch-list
+          - owainlewis/awesome-artificial-intelligence
+          - googleapis/mcp-toolbox
+          - udecode/plate
+          - ag-ui-protocol/ag-ui
+          - memvid/memvid
+          - lukas-blecher/LaTeX-OCR
+          - stackblitz/bolt.new
+          - triggerdotdev/trigger.dev
+          - emilwallner/Screenshot-to-code
+          - ai-shifu/ChatALL
+          - piskvorky/gensim
+          - MODSetter/SurfSense
+          - huggingface/transformers.js
+          - dagger/dagger
+          - xpzouying/xiaohongshu-mcp
+          - ddbourgin/numpy-ml
+          - Arindam200/awesome-ai-apps
+          - instillai/TensorFlow-Course
+          - alibaba/MNN
+          - wkentaro/labelme
+          - raga-ai-hub/RagaAI-Catalyst
+          - ramitsurana/awesome-kubernetes
+          - tracel-ai/burn
+          - alibaba/zvec
+          - vibrantlabsai/ragas
+          - GLips/Figma-Context-MCP
+          - GreyDGL/PentestGPT
+          - budtmo/docker-android
+          - dottxt-ai/outlines
+          - treeverse/dvc
+          - GeeeekExplorer/nano-vllm
+          - kubeflow/kubeflow
+          - camenduru/stable-diffusion-webui-colab
+          - modelscope/ms-swift
+          - oxford-cs-deepnlp-2017/lectures
+          - Anionex/banana-slides
+          - plandex-ai/plandex
+          - eigent-ai/eigent
+          - Unstructured-IO/unstructured
+          - open-metadata/OpenMetadata
+          - kaldi-asr/kaldi
+          - zai-org/ChatGLM2-6B
+          - ggml-org/ggml
+          - cmusatyalab/openface
+          - kailashahirwar/cheatsheets-ai
+          - DataTalksClub/mlops-zoomcamp
+          - electerm/electerm
+          - k2-fsa/sherpa-onnx
+          - superset-sh/superset
+          - zziz/pwc
+          - n8n-io/self-hosted-ai-starter-kit
+          - GaiZhenbiao/ChuanhuChatGPT
+          - wdndev/llm_interview_note
+          - ty4z2008/Qix
+          - alphacep/vosk-api
+          - yusufkaraaslan/Skill_Seekers
+          - Tencent-Hunyuan/Hunyuan3D-2
+          - corsairdev/corsair
+          - CoplayDev/unity-mcp
+          - NanmiCoder/cc-haha
+          - ConardLi/easy-dataset
+          - millionco/react-doctor
+          - AliaksandrSiarohin/first-order-model
+          - virgili0/Virgilio
+          - jujumilk3/leaked-system-prompts
+          - microsoft/RD-Agent
+          - botpress/botpress
+          - graykode/nlp-tutorial
+          - optuna/optuna
+          - kyegomez/OpenMythos
+          - NVIDIA/DeepLearningExamples
+          - BrainJS/brain.js
+          - NVIDIA/TensorRT-LLM
+          - llmware-ai/llmware
+          - yetone/magpie
+          - datawhalechina/easy-rl
+          - bulletphysics/bullet3
+          - mamoe/mirai
+          - oblien/openship
+          - livekit/agents
+          - ShangtongZhang/reinforcement-learning-an-introduction
+          - DataTalksClub/machine-learning-zoomcamp
+          - LlamaChinese/Llama-Chinese
+          - BlinkDL/RWKV-LM
+          - aleju/imgaug
+          - nltk/nltk
+          - hindupuravinash/the-gan-zoo
+          - casdoor/casdoor
+          - palmier-io/palmier-pro
+          - waooAI/waoowaoo
+          - FlashML-org/FreeToken
+          - NevaMind-AI/memU
+          - nidhinjs/prompt-master
+          - gunthercox/ChatterBot
+          - carla-simulator/carla
+          - miuuyy/codex-chatgpt-web
+          - davisking/dlib
+          - fathah/hermes-desktop
+          - e2b-dev/E2B
+          - flairNLP/flair
+          - jindongwang/transferlearning
+          - davidsandberg/facenet
+          - dmlc/dgl
+          - deeplearning4j/deeplearning4j
+          - janishar/mit-deep-learning-book-pdf
+          - EleutherAI/lm-evaluation-harness
+          - visenger/awesome-mlops
+          - mlfoundations/open_clip
+          - microsoft/agent-framework
+          - donnemartin/awesome-aws
+          - datawhalechina/llm-universe
+          - WongKinYiu/yolov7
+          - Open-LLM-VTuber/Open-LLM-VTuber
+          - nanobrowser/nanobrowser
+          - isl-org/Open3D
+          - semantica-agi/semantica
+          - browseros-ai/BrowserOS
+          - DLR-RM/stable-baselines3
+          - microsoft/LoRA
+          - apache/tvm
+          - nmap/nmap
+          - Data-Centric-AI-Community/fg-data-profiling
+          - Lightning-AI/litgpt
+          - XiaomiMiMo/MiMo-Code
+          - Orchestra-Research/AI-Research-SKILLs
+          - YouMind-OpenLab/awesome-nano-banana-pro-prompts
+          - divamgupta/diffusionbee-stable-diffusion-ui
+          - modelcontextprotocol/typescript-sdk
+          - huggingface/speech-to-speech
+          - EverMind-AI/EverOS
+          - tangyudi/Ai-Learn
+          - NVIDIA/TensorRT
+          - zoicware/RemoveWindowsAI
+          - dair-ai/AI-Papers-of-the-Week
+          - langchain4j/langchain4j
+          - halfrost/Halfrost-Field
+          - Portkey-AI/gateway
+          - dragen1860/Deep-Learning-with-TensorFlow-book
+          - InsForge/InsForge
+          - MorvanZhou/tutorials
+          - DuarteSantos8/openGym
+          - Imbad0202/academic-research-skills-codex
+          - StarTrail-org/LEANN
+          - abus-aikorea/voice-pro
+          - neuml/txtai
+          - alicevision/Meshroom
+          - jacobgil/pytorch-grad-cam
+          - PaddlePaddle/PaddleNLP
+          - mrexodia/ida-pro-mcp
+          - colmap/colmap
+          - thuml/Time-Series-Library
+          - TencentCloud/CubeSandbox
+          - kmario23/deep-learning-drizzle
+          - ConardLi/garden-skills
+          - codexu/note-gen
+          - eugeneyan/open-llms
+          - 0x4m4/hexstrike-ai
+          - junyanz/CycleGAN
+          - zalandoresearch/fashion-mnist
+          - cfug/dio
+          - khangich/machine-learning-interview
+          - chenyuntc/pytorch-book
+          - jina-ai/clip-as-service
+          - steven2358/awesome-generative-ai
+          - The-Pocket/PocketFlow-Tutorial-Codebase-Knowledge
+          - PaddlePaddle/PaddleSpeech
+          - Farama-Foundation/Gymnasium
+          - ritchieng/the-incredible-pytorch
+          - rasbt/python-machine-learning-book
+          - sapientinc/HRM
+          - simular-ai/Agent-S
+          - Tencent-Hunyuan/HunyuanVideo
+          - zilliztech/claude-context
+          - alex000kim/nsfw_data_scraper
+          - langgptai/LangGPT
+          - assistant-ui/assistant-ui
+          - axolotl-ai-cloud/axolotl
+          - bentoml/OpenLLM
+          - srush/GPU-Puzzles
+          - extreme-assistant/CVPR2024-Paper-Code-Interpretation
+          - diff-usion/Awesome-Diffusion-Models
+          - DayBreak-u/chineseocr_lite
+          - rany2/edge-tts
+          - OpenMOSS/MOSS
+          - Vincentwei1021/video-shotcraft
+          - FlagOpen/FlagEmbedding
+          - Embedding/Chinese-Word-Vectors
+          - RUCAIBox/LLMSurvey
+          - datawhalechina/all-in-rag
+          - xmu-xiaoma666/External-Attention-pytorch
+          - FareedKhan-dev/train-llm-from-scratch
+          - spencermountain/compromise
+          - google/sentencepiece
+          - google/artemis
+          - LMCache/LMCache
+          - kubeshark/kubeshark
+          - nerfstudio-project/nerfstudio
+          - multimodal-art-projection/YuE
+          - dataelement/bisheng
+          - tadata-org/fastapi_mcp
+          - tonybeltramelli/pix2code
+          - tw93/Kami
+          - Jeffallan/claude-skills
+    steps:
+      - name: Clone ${{ matrix.repo }} (shallow)
+        run: |
+          dir="${GITHUB_REPO##*/}"
+          start=$(date +%s%3N)
+          git clone --depth 1 "https://github.com/$GITHUB_REPO" "$dir"
+          elapsed=$(( $(date +%s%3N) - start ))
+          {
+            echo "## $GITHUB_REPO"
+            echo "- commit: \`$(git -C "$dir" rev-parse HEAD)\`"
+            echo "- subject: $(git -C "$dir" log -1 --pretty=%s)"
+            echo "- size: $(du -sh "$dir" | cut -f1)"
+            echo "- tracked files: $(git -C "$dir" ls-files | wc -l)"
+            echo "- shallow: $(git -C "$dir" rev-parse --is-shallow-repository)"
+            echo "- clone time: ${elapsed}ms"
+            echo "- disk free after: $(df -h --output=avail / | tail -1 | tr -d ' ')"
+          } | tee "report-$dir.txt" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_REPO: ${{ matrix.repo }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report-${{ strategy.job-index }}
+          path: report-*.txt
+          retention-days: 1

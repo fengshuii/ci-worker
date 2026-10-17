@@ -1,4 +1,4 @@
-name: pull-repos
+name: pull-ai-1
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pull-repos-${{ github.ref }}
+  group: pull-ai-1-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -29,7 +29,6 @@ jobs:
           - obra/superpowers
           - affaan-m/ECC
           - deepseek-ai/deepseek-harness
-          - multica-ai/andrej-karpathy-skills
           - n8n-io/n8n
           - tensorflow/tensorflow
           - firecrawl/firecrawl
@@ -45,13 +44,16 @@ jobs:
           - langflow-ai/langflow
           - langchain-ai/langchain
           - farion1231/cc-switch
+          - x1xhlol/system-prompts-and-models-of-ai-tools
           - Shubhamsaboo/awesome-llm-apps
+          - github/spec-kit
+          - Comfy-Org/ComfyUI
           - harry0703/MoneyPrinterTurbo
-          - ggml-org/llama.cpp
           - Graphify-Labs/graphify
+          - shadcn-ui/ui
           - browser-use/browser-use
-          - earendil-works/pi
           - JuliusBrussee/caveman
+          - supabase/supabase
           - TauricResearch/TradingAgents
           - google-gemini/gemini-cli
           - rasbt/LLMs-from-scratch
@@ -79,7 +81,6 @@ jobs:
           - Developer-Y/cs-video-courses
           - datawhalechina/hello-agents
           - lobehub/lobehub
-          - opendatalab/MinerU
           - d2l-ai/d2l-zh
           - netdata/netdata
           - dair-ai/Prompt-Engineering-Guide
@@ -90,12 +91,16 @@ jobs:
           - microsoft/ai-agents-for-beginners
           - ComposioHQ/awesome-claude-skills
           - tesseract-ocr/tesseract
+          - Asabeneh/30-Days-Of-Python
           - ruvnet/ruflo
           - headroomlabs-ai/headroom
           - hiyouga/LlamaFactory
           - binhnguyennus/awesome-scalability
           - thedaviddias/Front-End-Checklist
           - openbq-org/OpenBB
+          - debpalash/VoiceStudio
+          - Fission-AI/OpenSpec
+          - binary-husky/gpt_academic
           - FoundationAgents/MetaGPT
           - rohitg00/ai-engineering-from-scratch
           - code-yeongyu/oh-my-openagent
@@ -103,42 +108,50 @@ jobs:
           - asgeirtj/system_prompts_leaks
           - usestrix/strix
           - calesthio/OpenMontage
+          - docling-project/docling
           - scikit-learn/scikit-learn
           - shanraisshan/claude-code-best-practice
           - labmlai/annotated_deep_learning_paper_implementations
           - mem0ai/mem0
           - Mintplex-Labs/anything-llm
+          - xtekky/gpt4free
           - ZhuLinsen/daily_stock_analysis
           - heygen-com/hyperframes
           - keras-team/keras
           - jingyaogong/minimind
           - upstash/context7
+          - RVC-Boss/GPT-SoVITS
           - sansan0/TrendRadar
           - ultralytics/ultralytics
-          - pathwaycom/pathway
           - microsoft/autogen
           - BerriAI/litellm
           - CorentinJ/Real-Time-Voice-Cloning
           - crewAIInc/crewAI
           - MemPalace/mempalace
+          - meilisearch/meilisearch
           - pathwaycom/serviette
           - ultralytics/yolov5
+          - jamiepine/voicebox
           - blader/humanizer
+          - zylon-ai/private-gpt
           - deepfakes/faceswap
-          - Lordog/dive-into-llms
           - ageitgey/face_recognition
           - hesreallyhim/awesome-claude-code
           - aaif-goose/goose
           - coreyhaines31/marketingskills
           - bojieli/ai-agent-book
+          - lencx/ChatGPT
           - ggml-org/whisper.cpp
+          - bmad-code-org/BMAD-METHOD
           - ChromeDevTools/chrome-devtools-mcp
-          - CherryHQ/cherry-studio
           - run-llama/llama_index
+          - Imbad0202/academic-research-skills
+          - dbeaver/dbeaver
           - Avik-Jain/100-Days-Of-ML-Code
           - elder-plinius/CL4R1T4S
           - roboflow/supervision
           - vectorize-io/hindsight
+          - upscayl/upscayl
           - GokuMohandas/Made-With-ML
           - kepano/obsidian-skills
           - mudler/LocalAI
@@ -147,8 +160,8 @@ jobs:
           - JuliaLang/julia
           - HKUDS/nanobot
           - jeecgboot/JeecgBoot
+          - GitHubDaily/GitHubDaily
           - sickn33/agentic-awesome-skills
-          - oobabooga/textgen
           - zhayujie/CowAgent
           - apache/airflow
           - siyuan-note/siyuan
@@ -160,6 +173,8 @@ jobs:
           - LibreChat-AI/LibreChat
           - janhq/jan
           - herdrdev/herdr
+          - reactive-resume/reactive-resume
+          - danielmiessler/Fabric
           - Kong/kong
           - ray-project/ray
           - gradio-app/gradio
@@ -167,16 +182,20 @@ jobs:
           - langchain-ai/langgraph
           - deepspeedai/DeepSpeed
           - agno-agi/agno
+          - apachecn/ailearning
+          - 666ghj/BettaFish
           - tinyhumansai/openhuman
           - AstrBotDevs/AstrBot
+          - chatboxai/chatbox
           - HKUDS/DeepTutor
           - hpcaitech/ColossalAI
           - anthropics/claude-plugins-official
-          - microsoft/BitNet
           - codewhale-hq/Codewhale
           - wshobson/agents
+          - pingcap/tidb
           - photoprism/photoprism
           - HKUDS/LightRAG
+          - volcengine/OpenViking
           - novuhq/novu
           - github/awesome-copilot
           - drawdb-io/drawdb
@@ -185,9 +204,11 @@ jobs:
           - mindsdb/mindshub
           - The-Vibe-Company/quivr
           - floodsung/Deep-Learning-Papers-Reading-Roadmap
+          - OpenBMB/VoxCPM
           - bytedance/UI-TARS-desktop
           - VectifyAI/PageIndex
           - lyogavin/airllm
+          - RSSNext/Folo
           - google/langextract
           - google-research/google-research
           - naptha/tesseract.js
@@ -199,6 +220,7 @@ jobs:
           - CopilotKit/CopilotKit
           - AlexsJones/llmfit
           - fengdu78/Coursera-ML-AndrewNg-Notes
+          - myshell-ai/OpenVoice
           - Dokploy/dokploy
           - khoj-ai/khoj
           - TencentARC/GFPGAN
@@ -208,10 +230,15 @@ jobs:
           - google-ai-edge/mediapipe
           - ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code
           - sgl-project/sglang
+          - huggingface/pytorch-image-models
+          - xinntao/Real-ESRGAN
           - JCodesMore/ai-website-cloner-template
           - babysor/MockingBird
+          - blakeblackshear/frigate
+          - hankcs/HanLP
           - microsoft/graphrag
           - DayuanJiang/next-ai-draw-io
+          - continuedev/continue
           - langfuse/langfuse
           - VoltAgent/awesome-agent-skills
           - esengine/DeepSeek-Reasonix
@@ -221,6 +248,29 @@ jobs:
           - p-e-w/heretic
           - virgiliojr94/book-to-skill
           - qdrant/qdrant
+          - TheAlgorithms/C-Plus-Plus
+          - huggingface/diffusers
+          - freestylefly/awesome-gpt-image-2
+          - mukul975/Anthropic-Cybersecurity-Skills
+          - SillyTavern/SillyTavern
+          - BVLC/caffe
+          - CMU-Perceptual-Computing-Lab/openpose
+          - Tencent/WeKnora
+          - openai/CLIP
+          - datawhalechina/happy-llm
+          - xitu/gold-miner
+          - mli/paper-reading
+          - explosion/spaCy
+          - Twigpine/openclaude
+          - TabbyML/tabby
+          - github/github-mcp-server
+          - huggingface/agents-course
+          - Pythagora-io/gpt-pilot
+          - iOfficeAI/AionUi
+          - lutzroeder/netron
+          - alibaba/nacos
+          - agentscope-ai/agentscope
+          - NandhaKishorM/laya
     steps:
       - name: Clone ${{ matrix.repo }} (shallow)
         run: |
@@ -243,6 +293,6 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
-          name: clone-report-${{ strategy.job-index }}
+          name: report-${{ strategy.job-index }}
           path: report-*.txt
           retention-days: 1

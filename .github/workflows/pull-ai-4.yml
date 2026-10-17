@@ -1,0 +1,298 @@
+name: pull-ai-4
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-ai-4-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        repo:
+          - MemTensor/MemOS
+          - speechbrain/speechbrain
+          - Arize-ai/phoenix
+          - Jack-Cherish/PythonPark
+          - hua1995116/awesome-ai-painting
+          - ludwig-ai/ludwig
+          - qubvel-org/segmentation_models.pytorch
+          - NielsRogge/Transformers-Tutorials
+          - EmbraceAGI/awesome-chatgpt-zh
+          - openchamber/openchamber
+          - milesial/Pytorch-UNet
+          - cocoindex-io/cocoindex
+          - cleanlab/cleanlab
+          - humanlayer/humanlayer
+          - lancedb/lancedb
+          - apify/apify-mcp-server
+          - 0xJacky/nginx-ui
+          - rerun-io/rerun
+          - cobusgreyling/loop-engineering
+          - holaboss-ai/holaOS
+          - thesysdev/openui
+          - kornia/kornia
+          - kangarooking/cangjie-skill
+          - hoya012/deep_learning_object_detection
+          - data-privacy-stack/presidio
+          - lucidrains/DALLE2-pytorch
+          - wandb/wandb
+          - The-Pocket/PocketFlow
+          - microsoft/promptflow
+          - voxel51/fiftyone
+          - tambo-ai/tambo
+          - huggingface/tokenizers
+          - rushter/MLAlgorithms
+          - PointCloudLibrary/pcl
+          - QuentinFuxa/WhisperLiveKit
+          - Lightricks/LTX-Video
+          - triton-inference-server/server
+          - vipstone/faceai
+          - modelcontextprotocol/inspector
+          - NopeCHALLC/nopecha-extension
+          - langchain-ai/open-swe
+          - thu-ml/tianshou
+          - alibaba/spring-ai-alibaba
+          - kedro-org/kedro
+          - ValueCell-ai/valuecell
+          - openvinotoolkit/openvino
+          - fastai/numerical-linear-algebra
+          - aws/amazon-sagemaker-examples
+          - huggingface/chat-ui
+          - adongwanai/AgentGuide
+          - lengstrom/fast-style-transfer
+          - google/dopamine
+          - KalyanKS-NLP/llm-engineer-toolkit
+          - TykTechnologies/tyk
+          - omnigent-ai/omnigent
+          - x-hw/amazing-qr
+          - WasmEdge/WasmEdge
+          - VoltAgent/voltagent
+          - LouisShark/chatgpt_system_prompt
+          - databrickslabs/dolly
+          - OpenPipe/ART
+          - doccano/doccano
+          - autogluon/autogluon
+          - mcp-use/mcp-use
+          - Yorko/mlcourse.ai
+          - esimov/caire
+          - Acly/krita-ai-diffusion
+          - CVHub520/X-AnyLabeling
+          - skypilot-org/skypilot
+          - lucidrains/denoising-diffusion-pytorch
+          - Baiyuetribe/paper2gui
+          - Megvii-BaseDetection/YOLOX
+          - phillipi/pix2pix
+          - pyannote/pyannote-audio
+          - bigscience-workshop/petals
+          - Thysrael/Horizon
+          - ultralytics/yolov3
+          - NVIDIA/cutlass
+          - oramasearch/orama
+          - vwxyzjn/cleanrl
+          - baptisteArno/typebot.io
+          - niedev/RTranslator
+          - zyddnys/manga-image-translator
+          - sigoden/aichat
+          - mnfst/awesome-free-llm-apis
+          - lexfridman/mit-deep-learning
+          - google/adk-recipes
+          - snakers4/silero-vad
+          - openframeworks/openFrameworks
+          - electric-sql/electric
+          - Narcooo/inkos
+          - ZeroLu/awesome-nanobanana-pro
+          - sfyc23/EverydayWechat
+          - oceanbase/oceanbase
+          - RunanywhereAI/runanywhere-sdks
+          - advimman/lama
+          - open-mmlab/Amphion
+          - Netflix/metaflow
+          - trailhq/Trail-Code
+          - StarTrail-org/PixelRAG
+          - astrid-runtime/astrid
+          - satellite-image-deep-learning/techniques
+          - ykdojo/claude-code-tips
+          - ymcui/Chinese-BERT-wwm
+          - Mooler0410/LLMsPracticalGuide
+          - mozilla/TTS
+          - OpenGVLab/InternVL
+          - stanfordnlp/CoreNLP
+          - YouMind-OpenLab/awesome-gpt-image-2
+          - microsoft/magentic-ui
+          - OpenRLHF/OpenRLHF
+          - wonderwhy-er/DesktopCommanderMCP
+          - OpenMined/PySyft
+          - yzhao062/pyod
+          - espnet/espnet
+          - open-mmlab/mmsegmentation
+          - google-deepmind/sonnet
+          - cloudflare/moltworker
+          - brightmart/nlp_chinese_corpus
+          - lyhue1991/eat_tensorflow2_in_30_days
+          - xuebinqin/U-2-Net
+          - alirezadir/AIMLInterviews
+          - evolution-foundation/evolution-api
+          - pycaret/pycaret
+          - Tiiny-AI/PowerInfer
+          - friuns2/BlackFriday-GPTs-Prompts
+          - roboflow/rf-detr
+          - jadore801120/attention-is-all-you-need-pytorch
+          - awslabs/mcp
+          - Lightricks/LTX-2
+          - TencentCloud/Octop
+          - apache/seatunnel
+          - roboflow/notebooks
+          - frankbria/ralph-claude-code
+          - mobile-next/mobile-mcp
+          - droidrun/mobilerun
+          - margelo/react-native-vision-camera
+          - unicity-sphere/sphere
+          - modem-dev/hunk
+          - arogozhnikov/einops
+          - pacifio/atlas
+          - xorbitsai/inference
+          - alvinunreal/oh-my-opencode-slim
+          - tflearn/tflearn
+          - ntegrals/openbrowser
+          - PeterL1n/RobustVideoMatting
+          - sloria/TextBlob
+          - spring-projects/spring-ai
+          - olistic/warriorjs
+          - MorvanZhou/Reinforcement-learning-with-tensorflow
+          - QwenAudio/SenseVoice
+          - usekaneo/kaneo
+          - BlinkDL/ChatRWKV
+          - replicate/cog
+          - zhouxiaoka/autoclip
+          - Nasiko-Labs/nasiko
+          - backnotprop/plannotator
+          - databendlabs/databend
+          - modelcontextprotocol/modelcontextprotocol
+          - ccfddl/ccf-deadlines
+          - Oneflow-Inc/oneflow
+          - xberg-io/xberg
+          - yzhao062/anomaly-detection-resources
+          - PaddlePaddle/PaddleSeg
+          - paradedb/paradedb
+          - oumi-ai/oumi
+          - shaxiu/XianyuAutoAgent
+          - Future-House/paper-qa
+          - NVlabs/Sana
+          - dotnet/machinelearning
+          - CursorTouch/Windows-MCP
+          - keras-team/autokeras
+          - voicepaw/so-vits-svc-fork
+          - crynta/terax-ai
+          - X-PLUG/MobileAgent
+          - LearningCircuit/local-deep-research
+          - Hvass-Labs/TensorFlow-Tutorials
+          - max-sixty/worktrunk
+          - activeloopai/deeplake
+          - MervinPraison/PraisonAI
+          - MakazhanAlpamys/Soup
+          - yagop/node-telegram-bot-api
+          - ai-collection/ai-collection
+          - openstatusHQ/openstatus
+          - modelscope/modelscope
+          - miurla/morphic
+          - nexu-io/html-anything
+          - Cadene/pretrained-models.pytorch
+          - ai-boost/awesome-prompts
+          - FareedKhan-dev/kimi-k3-in-c
+          - pyro-ppl/pyro
+          - realsenseai/librealsense
+          - Stability-AI/StableStudio
+          - WangRongsheng/awesome-LLM-resources
+          - dusty-nv/jetson-inference
+          - poloclub/transformer-explainer
+          - Uberi/speech_recognition
+          - amusi/Deep-Learning-Interview-Book
+          - lazyprogrammer/machine_learning_examples
+          - LykosAI/StabilityMatrix
+          - iflytek/astron-agent
+          - bentoml/BentoML
+          - 0xPlaygrounds/rig
+          - OlafenwaMoses/ImageAI
+          - google/adk-go
+          - maximhq/bifrost
+          - ashawkey/stable-dreamfusion
+          - liyupi/codefather
+          - clips/pattern
+          - MITDeepLearning/introtodeeplearning
+          - strands-agents/harness-sdk
+          - rockbenben/ChatGPT-Shortcut
+          - HarnessMD/munder-difflin
+          - mage-ai/mage-ai
+          - Project-MONAI/MONAI
+          - FoundationVision/VAR
+          - jingyaogong/minimind-v
+          - VowpalWabbit/vowpal_wabbit
+          - superradcompany/microsandbox
+          - EvoMap/evolver
+          - vastsa/FileCodeBox
+          - firerpa/lamda
+          - MVIG-SJTU/AlphaPose
+          - SWE-agent/mini-swe-agent
+          - vahidk/EffectiveTensorflow
+          - lastmile-ai/mcp-agent
+          - netease-youdao/EmotiVoice
+          - bitsandbytes-foundation/bitsandbytes
+          - aladdinpersson/Machine-Learning-Collection
+          - OptimalScale/LMFlow
+          - MorvanZhou/PyTorch-Tutorial
+          - idosal/git-mcp
+          - lucidrains/imagen-pytorch
+          - automazeio/ccpm
+          - deeplethe/utopia
+          - XPixelGroup/BasicSR
+          - nl8590687/ASRT_SpeechRecognition
+          - MariaDB/server
+          - ztjhz/BetterChatGPT
+          - bytedeco/javacv
+          - exadel-inc/CompreFace
+          - jnMetaCode/superpowers-zh
+          - google-deepmind/pysc2
+          - zilliztech/deep-searcher
+          - nebuly-ai/optimate
+          - ai-dynamo/dynamo
+          - tensorflow/examples
+          - WooooDyy/LLM-Agent-Paper-List
+          - utkuozbulak/pytorch-cnn-visualizations
+          - AI4Finance-Foundation/FinRobot
+    steps:
+      - name: Clone ${{ matrix.repo }} (shallow)
+        run: |
+          dir="${GITHUB_REPO##*/}"
+          start=$(date +%s%3N)
+          git clone --depth 1 "https://github.com/$GITHUB_REPO" "$dir"
+          elapsed=$(( $(date +%s%3N) - start ))
+          {
+            echo "## $GITHUB_REPO"
+            echo "- commit: \`$(git -C "$dir" rev-parse HEAD)\`"
+            echo "- subject: $(git -C "$dir" log -1 --pretty=%s)"
+            echo "- size: $(du -sh "$dir" | cut -f1)"
+            echo "- tracked files: $(git -C "$dir" ls-files | wc -l)"
+            echo "- shallow: $(git -C "$dir" rev-parse --is-shallow-repository)"
+            echo "- clone time: ${elapsed}ms"
+            echo "- disk free after: $(df -h --output=avail / | tail -1 | tr -d ' ')"
+          } | tee "report-$dir.txt" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_REPO: ${{ matrix.repo }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: report-${{ strategy.job-index }}
+          path: report-*.txt
+          retention-days: 1
