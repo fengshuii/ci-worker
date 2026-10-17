@@ -15,13 +15,46 @@ concurrency:
 jobs:
   pull:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     strategy:
       fail-fast: false
+      max-parallel: 20
       matrix:
         repo:
           - openai/codex
           - NousResearch/hermes-agent
+          - openclaw/openclaw
+          - can1357/oh-my-pi
+          - microsoft/generative-ai-for-beginners
+          - torvalds/linux
+          - JetBrains/intellij-community
+          - raspberrypi/linux
+          - google/material-design-icons
+          - roboflow/supervision
+          - remotion-dev/remotion
+          - microsoft/ai-agents-for-beginners
+          - danielmiessler/SecLists
+          - nexu-io/open-design
+          - commaai/openpilot
+          - microsoft/TypeScript
+          - vercel/next.js
+          - supabase/supabase
+          - openbq-org/OpenBB
+          - metabase/metabase
+          - microsoft/ML-For-Beginners
+          - twentyhq/twenty
+          - microsoft/Web-Dev-For-Beginners
+          - grafana/grafana
+          - PaddlePaddle/PaddleOCR
+          - godotengine/godot
+          - diegosouzapw/OmniRoute
+          - elastic/elasticsearch
+          - mrdoob/three.js
+          - nodejs/node
+          - pytorch/pytorch
+          - langflow-ai/langflow
+          - facebook/docusaurus
+          - tldraw/tldraw
     steps:
       - name: Clone ${{ matrix.repo }} (shallow)
         run: |
@@ -37,7 +70,7 @@ jobs:
             echo "- tracked files: $(git -C "$dir" ls-files | wc -l)"
             echo "- shallow: $(git -C "$dir" rev-parse --is-shallow-repository)"
             echo "- clone time: ${elapsed}ms"
-            echo "- finished at: $(date -u +%H:%M:%S.%3NZ)"
+            echo "- disk free after: $(df -h --output=avail / | tail -1 | tr -d ' ')"
           } | tee "report-$dir.txt" >> "$GITHUB_STEP_SUMMARY"
         env:
           GITHUB_REPO: ${{ matrix.repo }}
